@@ -11,6 +11,18 @@ export default function UserProfile({params} : any){
 
       
   }
+
+  const submitHandle2 = async() =>{
+    
+    const res = await axios.post('/api/issues/create' , {
+      "title" : "title",
+      "description" : "description"
+    });
+    // router.push('/login')
+    console.log(res);
+
+      
+  }
     return(
      
        <div className="flex justify-center align-middle bg-red-400">
@@ -18,6 +30,8 @@ export default function UserProfile({params} : any){
                {params.id}
 
                <button onClick={ submitHandle}> logout</button>
+               {/* <br /><br /><br /> */}
+               <button onClick={submitHandle2}>get</button>
              </h3>
 
        </div>

@@ -1,12 +1,23 @@
-import mongoose from "mongoose";
+import mongoose ,{Document, Schema} from "mongoose";
+
+
 
 enum Status {
-    OPEN,
-    IN_PROGRESS,
-    CLOSED
-  }
+    OPEN = "OPEN",
+    IN_PROGRESS = "IN_PROGRESS",
+    CLOSED = "CLOSED"
+}
 
-const issueSchema = new mongoose.Schema({
+interface IIssue extends Document {
+    title: string;
+    description?: string;
+    status: Status;
+    author : mongoose.Schema.Types.ObjectId
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
+const issueSchema : Schema = new mongoose.Schema<IIssue>({
    title : {
     type : String,
     required : [true , "please provide a suitable title"],
@@ -17,8 +28,14 @@ const issueSchema = new mongoose.Schema({
     },
    
     status : {
-        type : Status,
+        type : String,
+        enum: Object.values(Status),
         default : Status.OPEN,
+    },
+
+    author : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User",
     },
     
     createdAt : {
@@ -31,4 +48,4 @@ const issueSchema = new mongoose.Schema({
     }
 
 })
-const Issue =  mongoose.model("issue" , issueSchema);
+export const Issue =  mongoose.model<IIssue>("issue" , issueSchema);
