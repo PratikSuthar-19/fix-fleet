@@ -15,9 +15,9 @@ export default function UserProfile({params} : any){
      
        <div className="flex justify-center align-middle bg-red-400">
              <h3>
-               {params.id}
-
-               <button onClick={ submitHandle}> logout</button>
+               {/* {params.id} */}
+                about
+               {/* <button onClick={ submitHandle}> logout</button> */}
              </h3>
 
        </div>
