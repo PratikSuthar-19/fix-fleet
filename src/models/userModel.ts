@@ -1,6 +1,6 @@
 import { verify } from "crypto";
 import mongoose from "mongoose";
-import { unique } from "next/dist/build/utils";
+
 
 const userSchema = new mongoose.Schema({
     userName : {
@@ -20,19 +20,19 @@ const userSchema = new mongoose.Schema({
         required : [true , "please provide a password"],
     },
     
-    isVerified : {
-        type : Boolean,
-        default: false,
-    },
-    isAdmin : {
-        type: Boolean,
-        default : false,
-    },
+    // isVerified : {
+    //     type : Boolean,
+    //     default: false,
+    // },
+    // isAdmin : {
+    //     type: Boolean,
+    //     default : false,
+    // },
 
-    forgotPasswordToken : String,
-    forgotPasswordTokenExpiry : Date,
-    verifyToken : String,
-    verifyTokenExpiry : Date,
+    // forgotPasswordToken : String,
+    // forgotPasswordTokenExpiry : Date,
+    // verifyToken : String,
+    // verifyTokenExpiry : Date,
 })
 
 const User =  mongoose.model("user" , userSchema);

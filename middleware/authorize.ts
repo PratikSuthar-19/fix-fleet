@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
 
-export async function authorize(request : NextRequest) {
+export  async function authorize(request : NextRequest) {
     console.log("middle ware called")
     const token = await request.cookies.get("token")?.value
   

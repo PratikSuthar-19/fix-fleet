@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { authorize } from "../../../../../middleware/authorize";
+import  {authorize} from "../../../../../middleware/authorize";
 
 export  async function GET(request : NextRequest){
 
@@ -26,6 +26,9 @@ export  async function GET(request : NextRequest){
         }
 
      } 
+     else{
+        return NextResponse.json({error : "unauthorized"} , { status : 400})
+     }
     
   
 }
