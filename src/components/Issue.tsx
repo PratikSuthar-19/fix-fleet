@@ -1,9 +1,12 @@
 import { useState } from "react";
 import {useRouter} from 'next/navigation'
+import { title } from "process";
+import { describe } from "node:test";
  
 interface issueProps{
     title : string,
     status : string
+    description:string
     createdAt:string,
     id:string
 }
@@ -12,9 +15,20 @@ interface issueProps{
 const  Issue:React.FC<issueProps> =(props) =>{
     const router = useRouter();
 
+    const dataToSend ={
+        title : props.title,
+        status : props.status,
+        description : props.description
+    }
+
     const onClicjHandler = (id:any)=>{
-    
-        router.push(`/issue/${id}`)
+        
+        // router.push({
+        //     pathname: `/issue/${id}`,
+        //     query: {name : "pratik"},
+           
+        // });
+        router.push(`/issue/${id}`  )
     }
 const dateString =  props.createdAt;
 const dateObject = new Date(dateString);
