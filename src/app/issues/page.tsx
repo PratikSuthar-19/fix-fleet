@@ -1,24 +1,68 @@
 'use client'
 import Issue from "@/components/Issue"
-import { VscTriangleUp } from "react-icons/vsc";
+import { VscTriangleDown, VscTriangleUp } from "react-icons/vsc";
 import React from "react";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import axios from "axios";
+
+interface issuData{
+createdAt:string,
+description :string,
+status:string,
+title:string,
+_id:string
+
+}
 export default function Issues(){
 
-    const data = [
-        {title : "1qwwertyuyiopsadfghjklxxcvnmwe" , status : "open"},
-        {title : "2" , status : "open"},
-        {title : "3", status : "open"},
-        {title : "4" , status : "closed"},
-        {title : "5" , status : "closed"},
-        {title : "6", status : "in-progress"},
-        {title : "7", status : "closed"},
-        {title : "8" , status : "closed"},
-        {title : "9", status : "closed"},
-        {title : "10", status : "closed"},
-    ];
+    
+    const [data, setData] = useState<issuData[]>([]);
+  
+
+    useEffect(() => {
+      // Your data fetching logic here
+      const fetchData = async () => {
+        try {
+          const response = await axios.get('/api/issues/get')
+          const data = await response.data;
+          console.log(response)
+          setData(data);
+          setIssueData(data)
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      fetchData();
+    }, []);
+  
+    console.log(data)
+
+
+    // const data =[
+    //     {title : "jhbhjv" , status : "open"},
+    //     {title : "jhbhjv" , status : "open"},
+    //     {title : "jhbhjv" , status : "in-progress"},
+    //     {title : "jhbhjv" , status : "open"},
+    //     {title : "jhbhjv" , status : "open"},
+    //     {title : "jhbhjv" , status : "in-progress"},
+    //     {title : "jhbhjv" , status : "in-progress"},
+    //     {title : "jhbhjv" , status : "closed"},
+    //     {title : "jhbhjv" , status : "closed"},
+    //     {title : "jhbhjv" , status : "in-progress"},
+    //     {title : "jhbhjv" , status : "closed"},
+    //     {title : "jhbhjv" , status : "closed"},
+    //     {title : "jhbhjv" , status : "in-progress"},
+    // ]
+
+    
+     
+
+
+
     const[issuedata , setIssueData] = useState(data);
+    console.log(issuedata)
     const[open , setOpen] = useState(false)
     const [filterValue , setFilterValue] = useState('All')
     const [currentPage, setCurrentPage] = useState(1);
@@ -35,7 +79,7 @@ export default function Issues(){
     const filtervalueHandler = (value :any)=>{
         setFilterValue(value);
         if(value !== 'all'){
-            const filteredData = data.filter(item => item.status === value);
+            const filteredData = data.filter((item => item.status === value));
         setIssueData(filteredData)
         }else{
             // const filteredData = data.filter(item => item.status === value);
@@ -50,13 +94,14 @@ export default function Issues(){
     return(
     
        <div>
-         <Navbar/>
+         {/* <Navbar/> */}
+
        <div className=" flex flex-col justify-center m-10 align-center gap-5 ">
          
          <div className="flex ">
         <button className="w-max  p-2 pl-4 pr-4 rounded-lg text-[18px] flex flex-row gap-1 border-2 border-black bg-black text-white  " onClick={onClickHandle}>
             <p>{filterValue}</p>
-            <VscTriangleUp className="text-center mt-1 text-while"   />
+            <VscTriangleDown className="text-center mt-1 text-while"   />
         </button>
 
         {open && <div className=" w-[10rem] bg-white  p-1 text-left border-[1px] border-gray rounded-lg shadow-md shadow-gray-400 absolute " > 
@@ -81,7 +126,7 @@ export default function Issues(){
         </div>
         
         {currentItems.map((item, index) => (
-          <Issue key={index} title={item.title} status={item.status}/>
+          <Issue key={index} title={item.title} status={item.status} createdAt={item.createdAt}/>
         ))}
       
         
@@ -95,6 +140,9 @@ export default function Issues(){
         >
           Previous
         </button>
+        <div className="p-3 pl-5 pr-5 rounded-lg border-2 border-black">
+            {currentPage}
+        </div>
         <button
           className="bg-black text-white w-[6rem] p-3 rounded-lg "
           onClick={() => paginate(currentPage + 1)}

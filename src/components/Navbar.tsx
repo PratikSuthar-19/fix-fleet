@@ -9,22 +9,18 @@ const Navbar = () => {
     console.log(pathName)
     const links = [
         {href : '/' ,  place : 'Dashboard'},
-        {href : '/isuue' , place : "Issue"}
+        {href : '/issues' , place : "Issue"}
     ]
   return (
-   <nav className='flex gap-10 border-b-2 shadow-md shadow-gray border-solid border-black leading-8 p-5 items-center'>
+   <nav className='flex gap-10 border-b-[1px] shadow-md shadow-gray border-solid border-black leading-8 p-5 items-center'>
     <div className=''>
       <Link href='/'>
       <IoBugSharp />
       </Link>
     </div>
 
-    {/* <ul  className='flex gap-10 '>
-        {links.map((link)=>(<Link className={`${link.href===pathName ? 'text-black' : 'text-[#828282]'} font-semibold hover:text-black transition-colors text-[1.12rem]`} href={link.href}> {link.place}</Link>))}
-    </ul> */}
-
 <ul  className='flex gap-10 '>
-        {links.map((link)=>(<Link className={
+        {links.map((link , index)=>(<Link  key={index} className={
                                      classNames({
                                         'text-black' : link.href===pathName,
                                         'text-[#828282]':link.href!==pathName,

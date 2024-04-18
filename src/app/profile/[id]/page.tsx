@@ -29,8 +29,8 @@ export default function UserProfile({params} : any){
   // }
     return(
       <>
-      <Navbar/>
-     <IssueForm/>
+      {/* <Navbar/>
+     <IssueForm/> */}
      </>
 
 
