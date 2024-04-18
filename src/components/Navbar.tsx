@@ -12,7 +12,7 @@ const Navbar = () => {
         {href : '/isuue' , place : "Issue"}
     ]
   return (
-   <nav className='flex gap-10 border-2 border-solid border-black leading-8 p-5 items-center'>
+   <nav className='flex gap-10 border-b-2 shadow-md shadow-gray border-solid border-black leading-8 p-5 items-center'>
     <div className=''>
       <Link href='/'>
       <IoBugSharp />

@@ -64,10 +64,10 @@ export default function Issues(){
         </div>
 
         <div>
-        <div className="grid grid-cols-4 text-[18px] font-bold border-gray border-[1px] rounded-t-lg bg-gray-100 ">
-          <div className="col-span-2 p-5 text-left "> issue</div>
-          <div className="p-5 text-left ">status</div>
-          <div className="p-5 text-left"> created</div>
+        <div className="grid grid-cols-4 text-[18px] font-bold border-gray border-[1px] rounded-t-lg bg-gray-100 max-sm:grid-cols-2  ">
+          <div className="col-span-2 p-5 text-left "> issue </div>
+           <div className="p-5 text-left max-sm:hidden">status</div>
+          <div className="p-5 text-left max-sm:hidden "> created</div> 
         </div>
         
         {currentItems.map((item, index) => (
