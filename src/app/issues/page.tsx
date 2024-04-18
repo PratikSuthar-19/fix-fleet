@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 export default function Issues(){
 
     const data = [
-        {title : "1" , status : "open"},
+        {title : "1qwwertyuyiopsadfghjklxxcvnmwe" , status : "open"},
         {title : "2" , status : "open"},
         {title : "3", status : "open"},
         {title : "4" , status : "closed"},
@@ -18,6 +18,7 @@ export default function Issues(){
         {title : "9", status : "closed"},
         {title : "10", status : "closed"},
     ];
+    const[issuedata , setIssueData] = useState(data);
     const[open , setOpen] = useState(false)
     const [filterValue , setFilterValue] = useState('All')
     const [currentPage, setCurrentPage] = useState(1);
@@ -25,7 +26,7 @@ export default function Issues(){
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = issuedata.slice(indexOfFirstItem, indexOfLastItem);
 
     const onClickHandle = ()=>{
         setOpen(!open)
@@ -33,6 +34,15 @@ export default function Issues(){
 
     const filtervalueHandler = (value :any)=>{
         setFilterValue(value);
+        if(value !== 'all'){
+            const filteredData = data.filter(item => item.status === value);
+        setIssueData(filteredData)
+        }else{
+            // const filteredData = data.filter(item => item.status === value);
+            setIssueData(data)
+        }
+        
+        
         setOpen(!open)
     }
 
@@ -52,11 +62,11 @@ export default function Issues(){
         {open && <div className=" w-[10rem] bg-white  p-1 text-left border-[1px] border-gray rounded-lg shadow-md shadow-gray-400 absolute " > 
             <ul>
                 <li className=" p-2 pl-5 pr-5 hover:bg-black  hover:text-white rounded-lg mb-1 " 
-                    onClick={()=>filtervalueHandler('All')}>All</li>
+                    onClick={()=>filtervalueHandler('all')}>All</li>
                 <li className=" p-2 pl-5 pr-5  hover:bg-black hover:text-white rounded-lg mb-1"
-                    onClick={()=>filtervalueHandler('Open')}>Open</li>
+                    onClick={()=>filtervalueHandler('open')}>Open</li>
                 <li className=" p-2 pl-5 pr-5  hover:bg-black hover:text-white rounded-lg mb-1"
-                    onClick={()=>filtervalueHandler('In-progress')}>In-progress</li>
+                    onClick={()=>filtervalueHandler('in-progress')}>In-progress</li>
                 <li className=" p-2 pl-5 pr-5  hover:bg-black hover:text-white rounded-lg mb-1"
                     onClick={()=>filtervalueHandler('closed')}>Closed</li>
             </ul>
