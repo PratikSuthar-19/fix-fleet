@@ -1,20 +1,23 @@
 import { useState } from "react";
-
+import {useRouter} from 'next/navigation'
+ 
 interface issueProps{
     title : string,
     status : string
-    createdAt:string
+    createdAt:string,
+    id:string
 }
+
+
 const  Issue:React.FC<issueProps> =(props) =>{
+    const router = useRouter();
 
-    // const[closed , setClosed] = useState(false);
-
-    // if(props.status === 'closed'){
-    //     setClosed(true);
-    // }
+    const onClicjHandler = (id:any)=>{
     
-    const dateString =  props.createdAt;
-    const dateObject = new Date(dateString);
+        router.push(`/issue/${id}`)
+    }
+const dateString =  props.createdAt;
+const dateObject = new Date(dateString);
 
 const year = dateObject.getFullYear() % 100; // Get last two digits of the year
 const month = dateObject.getMonth() + 1; // Months are zero-based, so add 1
@@ -26,7 +29,8 @@ const formattedDay = day < 10 ? `0${day}` : day;
 
 const formattedDate = `${formattedYear}-${formattedMonth}-${formattedDay}`;
     return(
-       <div className="grid grid-cols-4 text-[18px] border-b-[1px] border-gray border-r-[1px] border-l-[1px] max-sm:grid-cols-2 ">
+       <div className="grid grid-cols-4 text-[18px] border-b-[1px] border-gray border-r-[1px] border-l-[1px] max-sm:grid-cols-2 "
+             onClick={()=>{onClicjHandler(props.id)}}>
           <div className="col-span-2 p-2 text-left ml-2"> {props.title}</div>
 
           {props.status === 'CLOSED' && <div className="p-3 text-center"><p className="bg-red-100 text-red-700 font-bold text-[14px] w-max pl-3 pr-3 pt-1 pb-1 rounded-lg">closed</p></div>}

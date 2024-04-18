@@ -44,7 +44,8 @@ const handleSubmit = async() =>{
 }
       
    return(
-   <div className="grid place-items-center min-h-screen">
+    
+   <div className="flex justify-center mt-20">
       
      <div>
         <h1 className="text-[2rem]  p-3">Login</h1>

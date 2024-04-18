@@ -126,7 +126,7 @@ export default function Issues(){
         </div>
         
         {currentItems.map((item, index) => (
-          <Issue key={index} title={item.title} status={item.status} createdAt={item.createdAt}/>
+          <Issue key={index} title={item.title} status={item.status} createdAt={item.createdAt} id={item._id}/>
         ))}
       
         

@@ -3,9 +3,10 @@ import type { NextRequest } from "next/server";
 import {Issue } from '@/models/isuueModel'
 import {connect} from '@/dbConfing/dbConfig'
 
-connect();
+// connect();
 
 export async function GET(request : NextRequest){
+    await connect();
   
         try{
            const data = await Issue.find({});
