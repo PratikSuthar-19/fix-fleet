@@ -1,3 +1,4 @@
+'use client'
 import React, { ChangeEvent } from "react"
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
@@ -11,8 +12,6 @@ export default function IssueForm(){
     const[desc , setDesc ] = React.useState('')
     const[descLable , setDescLable ] = React.useState(false)
 
-    console.log(title)
-    console.log(desc)
 
     const onChangeTitle = ( e:React.ChangeEvent<HTMLInputElement>) =>{
         e.preventDefault();
@@ -27,7 +26,7 @@ export default function IssueForm(){
     const createHandle = async() =>{
 
         if(title === ''){
-            console.log("true")
+            // console.log("true")
         setTitleLable(true)
        } else if(desc === ''){
         setDescLable(true)
@@ -38,7 +37,7 @@ export default function IssueForm(){
           "title" : title,
          "description" : desc
         });
-        console.log(res)
+        // console.log(res)
         setTitle('')
         setDesc('')
         setTitleLable(false)
@@ -49,22 +48,22 @@ export default function IssueForm(){
  
     return(
         <>
-       <section className="flex flex-col p-5 mt-5 gap-5">
+       <section className="flex flex-col p-5 mt-5 gap-5 max-sm:grid col-span-1">
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2" >
         <input type="text" 
                id="title" 
                name="title" 
                placeholder="Title" 
                value={title} 
-               className= " w-[50%] p-3 rounded-lg border-2 border-black"  
+               className= " w-[50%] p-3 rounded-lg border-2 border-black max-sm:w-[100%]"  
                onChange={onChangeTitle} />
 
         { titleLable && <label htmlFor="text" className="text-red-600 ml-2">Title is required.</label>}
         </div>
        
        <div className="flex flex-col gap-2">
-        <SimpleMDE className=" w-[50%] border-2 border-black rounded-lg" 
+        <SimpleMDE className=" w-[50%] border-2 border-black rounded-lg max-sm:w-[100%]" 
                    placeholder="Description" 
                    value={desc} 
                    name="description"  
