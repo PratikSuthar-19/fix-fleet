@@ -39,14 +39,10 @@ export default function Home() {
 
 
   const [data, setData] = useState<issuData[]>([]);
-  // const[ chartData , setChartData] = useState({
-  //   closed : 0,
-  //   open : 0,
-  //   inprogress : 0
-  // })
+ 
 
   useEffect(() => {
-    // Your data fetching logic here
+    
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/issues/get')

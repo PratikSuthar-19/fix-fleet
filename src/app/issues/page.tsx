@@ -65,7 +65,7 @@ export default function Issues(){
     const filtervalueHandler = (value :any)=>{
         setFilterValue(value);
         if(value !== 'all'){
-            const filteredData = data.filter((item => item.status === value));
+            const filteredData = data.filter((item => (item.status === value)));
         setIssueData(filteredData)
         }else{
             // const filteredData = data.filter(item => item.status === value);
@@ -103,11 +103,11 @@ export default function Issues(){
                 <li className=" p-2 pl-5 pr-5 hover:bg-black  hover:text-white rounded-lg mb-1 " 
                     onClick={()=>filtervalueHandler('all')}>All</li>
                 <li className=" p-2 pl-5 pr-5  hover:bg-black hover:text-white rounded-lg mb-1"
-                    onClick={()=>filtervalueHandler('open')}>Open</li>
+                    onClick={()=>filtervalueHandler('OPEN')}>Open</li>
                 <li className=" p-2 pl-5 pr-5  hover:bg-black hover:text-white rounded-lg mb-1"
-                    onClick={()=>filtervalueHandler('in-progress')}>In-progress</li>
+                    onClick={()=>filtervalueHandler('IN_PROGRESS')}>In-progress</li>
                 <li className=" p-2 pl-5 pr-5  hover:bg-black hover:text-white rounded-lg mb-1"
-                    onClick={()=>filtervalueHandler('closed')}>Closed</li>
+                    onClick={()=>filtervalueHandler('CLOSED')}>Closed</li>
             </ul>
         </div>}
         </div>
