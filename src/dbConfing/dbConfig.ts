@@ -1,6 +1,6 @@
-import { error } from "console";
 
-const mongoose = require('mongoose');
+
+const mongoose  = require('mongoose');
 
 export async function connect(){
     try{
@@ -21,4 +21,9 @@ export async function connect(){
        console.log(error);
     }
 }
+
+
+
+
+
 

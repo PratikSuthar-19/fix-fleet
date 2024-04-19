@@ -48,4 +48,5 @@ const issueSchema : Schema = new mongoose.Schema<IIssue>({
     }
 
 })
-export const Issue =  mongoose.model<IIssue>("issue" , issueSchema);
+// export const Issue =  mongoose.model<IIssue>("issue" , issueSchema);
+export const Issue = mongoose.models.issue || mongoose.model('issue', issueSchema);

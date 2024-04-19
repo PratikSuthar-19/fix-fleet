@@ -42,7 +42,7 @@ export  async function POST(request: NextRequest){
                success : true
           })
 
-          responce.cookies.set("token" , token , {httpOnly : true})
+          responce.cookies.set("token" , token , {httpOnly : true} )
 
           return responce
 

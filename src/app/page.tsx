@@ -37,8 +37,12 @@ interface issuData{
 
 export default function Home() {
 
+  const router = useRouter();
 
   const [data, setData] = useState<issuData[]>([]);
+
+
+ 
  
 
   useEffect(() => {
@@ -71,10 +75,10 @@ export default function Home() {
   const currentItems = data.slice(0, 5);
   console.log(currentItems)
   return (
-   <div className=" flex justify-between m-10">
-          <div className=" flex flex-col gap-10">
+   <div className=" flex justify-between m-10 max-sm:flex-col max-sm:m-5">
+          <div className=" flex flex-col gap-10 max-sm:gap-5">
 
-            <div className=" flex  gap-10">
+            <div className=" flex  gap-10 max-sm:gap-5">
               <div className="flex flex-col p-5 border-[2px] border-gray-300 rounded-lg gap-1">
                 <p className="text-[18px] font-[500] ">Open Issues</p>
                 <p className="text-[32px] font-bold text-center">{open.length}</p>
@@ -113,7 +117,7 @@ export default function Home() {
 
 
 
-          <div className="w-[40%] border-2 border-gray-200 rounded-lg">
+          <div className="w-[40%] border-2 border-gray-200 rounded-lg max-sm:w-[100%] max-sm:mt-5">
 
             <h1 className="text-[22px] font-bold text-left p-5">Latest Issues</h1>
 

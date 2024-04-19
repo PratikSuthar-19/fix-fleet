@@ -1,10 +1,19 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { IoBugSharp } from "react-icons/io5";
 import { usePathname } from 'next/navigation';
 import classNames from 'classnames';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+
 const Navbar = () => {
+
+  const[token , settoken] = useState('');
+  
+
+  const router = useRouter();
     const pathName = usePathname();
     console.log(pathName)
     const links1 = [
@@ -13,10 +22,24 @@ const Navbar = () => {
     ]
     const links2 = [
       {href : '/signin' ,  place : 'Signin'},
-      {href : '/login' , place : "Login"}
+      // {href : '/login' , place : "Login"},
   ]
+
+
+
+
+
+  const submitHandle = async() =>{
+    
+    const res = await axios.get('/api/users/logout');
+    router.push('/')
+    console.log(res);
+
+}
+
+   
   return (
-   <nav className='flex gap-10 border-b-[1px] shadow-md shadow-gray border-solid border-black leading-8 p-5 items-center'>
+   <nav className='flex gap-10 border-b-[1px] shadow-md shadow-gray border-solid border-black leading-8 p-5 items-center max-sm:text-[12px]'>
     <div className=''>
       <Link href='/'>
       <IoBugSharp />
@@ -24,7 +47,7 @@ const Navbar = () => {
     </div>
 
 <div className='flex flex-row justify-between   w-full'>
-<ul  className='flex gap-10 '>
+<ul  className='flex gap-10 max-sm:gap-3  max-sm:mt-3 '>
         {links1.map((link , index)=>(<Link  key={index} className={
                                      classNames({
                                         'text-black' : link.href===pathName,
@@ -33,13 +56,23 @@ const Navbar = () => {
                                                 })} href={link.href}> {link.place}</Link>))}
     </ul>
 
-    <ul  className='flex gap-10 '>
-        {links2.map((link , index)=>(<Link  key={index} className={
+    <ul  className='flex gap-10 max-sm:flex-col max-sm:gap-2'>
+    { token === '' ?<> {links2.map((link , index)=>(<Link  key={index} className={
                                      classNames({
                                         'text-black' : link.href===pathName,
                                         'text-[#828282]':link.href!==pathName,
                                         'font-semibold hover:text-black transition-colors text-[1.12rem]' : true
                                                 })} href={link.href}> {link.place}</Link>))}
+
+                    <Link   className={
+                                     classNames({
+                                        'text-black' : '/login'===pathName,
+                                        'text-[#828282]': '/login' !==pathName,
+                                        'font-semibold hover:text-black transition-colors text-[1.12rem]' : true
+                                                })} href={'/login'}>Login</Link>  </>  :                               
+            
+
+            <li onClick={submitHandle} className=' text-[#828282] font-semibold hover:text-black transition-colors text-[1.12rem]'>Logout</li>}
     </ul>
     </div>
     
