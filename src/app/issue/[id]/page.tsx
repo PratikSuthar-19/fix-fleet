@@ -39,7 +39,7 @@ export default function (){
         }
       };
   
-      fetchData();
+      // fetchData();
 
    },[])
 
@@ -105,7 +105,11 @@ const formattedDate = `${formattedYear}-${formattedMonth}-${formattedDay}`;
                  </Link>
 
 
-                <div  className="bg-red-500 text-white p-3 pl-10 pr-10 rounded-lg  max-sm:pr-2 max-sm:w-[10rem]">Delete Issue</div>
+                <div  className="bg-red-500 text-white p-3 pl-10 pr-10 rounded-lg  max-sm:pr-2 max-sm:w-[10rem]"
+                 onClick={async()=>{
+                  await axios.get(`/api/issue/delete/${id}`);
+                  router.push('/issues')
+                 }}>Delete Issue</div>
 
             </div>
 

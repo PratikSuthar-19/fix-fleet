@@ -10,7 +10,7 @@ import { useSearchParams } from "next/navigation";
 
 export default function IssueForm( ){
 
-    // const router = useRouter();
+    const router = useRouter();
     // const {msg} = router.query;
     // console.log(msg)
 
@@ -62,6 +62,7 @@ export default function IssueForm( ){
         setDesc('')
         setTitleLable(false)
         setDescLable(false)
+        router.push('/issues')
        }
        
     }
