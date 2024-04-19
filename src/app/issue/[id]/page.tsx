@@ -2,7 +2,10 @@
 import React from "react"
 import { useState , useEffect } from "react"
 import { usePathname } from 'next/navigation'
+import { useRouter } from "next/navigation"
 import axios from "axios"
+import Link from 'next/link'
+import { Query } from "react-query"
 
 interface issuData{
     createdAt:string,
@@ -13,13 +16,15 @@ interface issuData{
     }
 
 export default function (){
+
+  const router = useRouter()
     const pathname = usePathname()
     console.log(pathname)
     const url = pathname;
     const id = url.split('/').pop();
     console.log(id);
 
-   const[data , setData] = useState<issuData>({})
+   const[data , setData] = useState<issuData>({});
    
    useEffect(()=>{
     const fetchData = async () => {
@@ -80,8 +85,27 @@ const formattedDate = `${formattedYear}-${formattedMonth}-${formattedDay}`;
             <div className="flex flex-col justify-center mr-20 gap-5 max-sm:m-2">
                 {/* <div>unassign</div>
                 <input type="select" /> */}
-                <div className="bg-black text-white p-3 pl-10 pr-10 rounded-lg max-sm:pr-2 max-sm:w-[10rem]">Edit Issue</div>
-                <div  className="bg-black text-white p-3 pl-10 pr-10 rounded-lg  max-sm:pr-2 max-sm:w-[10rem]">Delete Issue</div>
+
+                {/* <div className="bg-black text-white p-3 pl-10 pr-10 rounded-lg max-sm:pr-2 max-sm:w-[10rem]"
+                 onClick={()=>{router.push(`/issue/${id}/edit`)}}>Edit Issue</div> */}
+
+
+                 <Link
+                 href = {
+                   {pathname :`/issue/${id}/edit`,
+                    query :{
+                       data : JSON.stringify(data)
+                    }
+                   }
+                   
+                 }
+                 >
+                 <div className="bg-black text-white p-3 pl-10 pr-10 rounded-lg max-sm:pr-2 max-sm:w-[10rem]"
+                 onClick={()=>{router.push(`/issue/${id}/edit`)}}>Edit Issue</div>
+                 </Link>
+
+
+                <div  className="bg-red-500 text-white p-3 pl-10 pr-10 rounded-lg  max-sm:pr-2 max-sm:w-[10rem]">Delete Issue</div>
 
             </div>
 

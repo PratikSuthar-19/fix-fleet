@@ -5,6 +5,7 @@ import React from "react";
 import { useState , useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface issuData{
 createdAt:string,
@@ -14,6 +15,8 @@ title:string,
 _id:string
 }
 export default function Issues(){
+
+  const router = useRouter();
 
     
     const [data, setData] = useState<issuData[]>([]);
@@ -75,6 +78,11 @@ export default function Issues(){
         setOpen(!open)
     }
 
+    const onClickNewIssue = ()=>{
+      router.push('/createIssue')
+    }
+    
+
     const filtervalueHandler = (value :any)=>{
         setFilterValue(value);
         if(value !== 'all'){
@@ -96,12 +104,20 @@ export default function Issues(){
          {/* <Navbar/> */}
 
        <div className=" flex flex-col justify-center m-10 align-center gap-5 ">
-         
+          
+          
          <div className="flex ">
+         <div className="flex justify-between w-full">
         <button className="w-max  p-2 pl-4 pr-4 rounded-lg text-[18px] flex flex-row gap-1 border-2 border-black bg-black text-white  " onClick={onClickHandle}>
             <p>{filterValue}</p>
             <VscTriangleDown className="text-center mt-1 text-while"   />
         </button>
+
+        <button className="w-max  p-2 pl-4 pr-4 rounded-lg text-[16px] flex flex-row gap-1 border-2 border-black bg-black text-white "
+                onClick={onClickNewIssue}>
+          New Issue
+        </button>
+        </div>
 
         {open && <div className=" w-[10rem] bg-white  p-1 text-left border-[1px] border-gray rounded-lg shadow-md shadow-gray-400 absolute " > 
             <ul>
