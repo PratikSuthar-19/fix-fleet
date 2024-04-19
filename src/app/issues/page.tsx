@@ -6,6 +6,7 @@ import { useState , useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface issuData{
 createdAt:string,
@@ -40,28 +41,6 @@ export default function Issues(){
     }, []);
   
     console.log(data)
-
-
-    // const data =[
-    //     {title : "jhbhjv" , status : "open"},
-    //     {title : "jhbhjv" , status : "open"},
-    //     {title : "jhbhjv" , status : "in-progress"},
-    //     {title : "jhbhjv" , status : "open"},
-    //     {title : "jhbhjv" , status : "open"},
-    //     {title : "jhbhjv" , status : "in-progress"},
-    //     {title : "jhbhjv" , status : "in-progress"},
-    //     {title : "jhbhjv" , status : "closed"},
-    //     {title : "jhbhjv" , status : "closed"},
-    //     {title : "jhbhjv" , status : "in-progress"},
-    //     {title : "jhbhjv" , status : "closed"},
-    //     {title : "jhbhjv" , status : "closed"},
-    //     {title : "jhbhjv" , status : "in-progress"},
-    // ]
-
-    
-     
-
-
 
     const[issuedata , setIssueData] = useState(data);
     console.log(issuedata)
@@ -141,7 +120,21 @@ export default function Issues(){
         </div>
         
         {currentItems.map((item, index) => (
+            <Link
+            href = {
+              {pathname :`/issue/${item._id}`,
+               query :{
+                  data : JSON.stringify(item)
+               }
+              }
+              
+            }
+            >
+
+
           <Issue key={index} title={item.title} status={item.status} createdAt={item.createdAt} id={item._id} description ={item.description}/>
+
+          </Link>
         ))}
       
         

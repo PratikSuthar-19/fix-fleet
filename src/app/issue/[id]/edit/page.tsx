@@ -14,6 +14,8 @@ export default function IssueForm( ){
     // const {msg} = router.query;
     // console.log(msg)
 
+    
+
     const serchParams = useSearchParams();
     const res:any = serchParams.get('data');
     const data = JSON.parse(res);

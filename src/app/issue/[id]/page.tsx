@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import axios from "axios"
 import Link from 'next/link'
 import { Query } from "react-query"
+import { useSearchParams } from "next/navigation"
 
 interface issuData{
     createdAt:string,
@@ -23,6 +24,12 @@ export default function (){
     const url = pathname;
     const id = url.split('/').pop();
     console.log(id);
+
+
+    const serchParams = useSearchParams();
+    const res:any = serchParams.get('data');
+    const item = JSON.parse(res);
+    console.log(item)
 
    const[data , setData] = useState<issuData>({});
    
@@ -45,7 +52,7 @@ export default function (){
 
 
    //for date
-const dateString =  data.createdAt;
+const dateString =  item.createdAt;
 const dateObject = new Date(dateString);
 
 const year = dateObject.getFullYear() % 100; // Get last two digits of the year
@@ -66,7 +73,7 @@ const formattedDate = `${formattedYear}-${formattedMonth}-${formattedDay}`;
 
          <div className="flex flex-col m-10 w-[60%] max-sm:ml-0 max-sm:w-full">
             <div className="ml-10 mt-5">
-                <h1 className="text-[32px] font-bold  ">{data.title}</h1>
+                <h1 className="text-[32px] font-bold  ">{item.title}</h1>
             </div>
 
             <div className=" flex gap-5 ml-10 mt-2">
@@ -77,7 +84,7 @@ const formattedDate = `${formattedYear}-${formattedMonth}-${formattedDay}`;
             </div>
 
              <div className=" border-[1px] border-black ml-10 mt-10 p-10 rounded-lg text-[20px] font-[500] max-sm:m-5 max-sm:mt-10">
-                {data.description}
+                {item.description}
              </div>
          </div>
 
@@ -94,14 +101,15 @@ const formattedDate = `${formattedYear}-${formattedMonth}-${formattedDay}`;
                  href = {
                    {pathname :`/issue/${id}/edit`,
                     query :{
-                       data : JSON.stringify(data)
+                       data : JSON.stringify(item)
                     }
                    }
                    
                  }
                  >
                  <div className="bg-black text-white p-3 pl-10 pr-10 rounded-lg max-sm:pr-2 max-sm:w-[10rem]"
-                 onClick={()=>{router.push(`/issue/${id}/edit`)}}>Edit Issue</div>
+                //  onClick={()=>{router.push(`/issue/${id}/edit`)}}
+                 >Edit Issue</div>
                  </Link>
 
 
