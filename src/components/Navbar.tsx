@@ -7,12 +7,13 @@ import { usePathname } from 'next/navigation';
 import classNames from 'classnames';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { Query } from 'react-query';
+
 
 const Navbar = () => {
 
-  const[token , settoken] = useState('');
+ 
   
-
   const router = useRouter();
     const pathName = usePathname();
     console.log(pathName)
@@ -26,16 +27,21 @@ const Navbar = () => {
   ]
 
 
-
-
-
   const submitHandle = async() =>{
     
     const res = await axios.get('/api/users/logout');
+    await localStorage.clear();
     router.push('/')
+   
     console.log(res);
 
 }
+
+
+
+let token : any =  localStorage.getItem("token");
+
+console.log(token)
 
    
   return (
@@ -57,7 +63,7 @@ const Navbar = () => {
     </ul>
 
     <ul  className='flex gap-10 max-sm:flex-col max-sm:gap-2'>
-    { token === '' ?<> {links2.map((link , index)=>(<Link  key={index} className={
+      {  !token ?  <> {links2.map((link , index)=>(<Link  key={index} className={
                                      classNames({
                                         'text-black' : link.href===pathName,
                                         'text-[#828282]':link.href!==pathName,
@@ -69,10 +75,10 @@ const Navbar = () => {
                                         'text-black' : '/login'===pathName,
                                         'text-[#828282]': '/login' !==pathName,
                                         'font-semibold hover:text-black transition-colors text-[1.12rem]' : true
-                                                })} href={'/login'}>Login</Link>  </>  :                               
+                                                })} href={'/login'}>Login</Link>  </>    :                           
             
 
-            <li onClick={submitHandle} className=' text-[#828282] font-semibold hover:text-black transition-colors text-[1.12rem]'>Logout</li>}
+             <li onClick={submitHandle} className=' text-[#828282] font-semibold hover:text-black transition-colors text-[1.12rem]'>Logout</li>}
     </ul>
     </div>
     

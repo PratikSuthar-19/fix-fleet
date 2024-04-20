@@ -94,7 +94,7 @@ export default function Home() {
             </div>
 
 
-            <div className=" mt-10 border-2 border-gray-200 rounded-lg p-10">
+            <div className=" mt-10 border-2 border-gray-200 rounded-lg p-20">
              <Bar data={{
                       labels : ["closed" , "open" , "in-progress"],
                       datasets:[{
@@ -139,7 +139,7 @@ export default function Home() {
 
 
 
-           <li className="flex flex-col m-2 p-2 border-b-2 border-gray-200">
+           <li className="flex flex-col m-2 p-1 border-b-2 border-gray-200">
                 <p className="pl-3">{item.title}</p> 
                 {item.status === 'CLOSED' && <div className="p-3 text-center"><p className="bg-red-100 text-red-700 font-bold text-[14px] w-max pl-3 pr-3 pt-1 pb-1 rounded-lg">closed</p></div>}
 

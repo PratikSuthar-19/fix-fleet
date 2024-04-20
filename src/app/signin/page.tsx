@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import axios from "axios";
+import { useRouter } from 'next/navigation';
 
 interface userFormInfo{
     userName : String ,
@@ -12,6 +13,7 @@ type type = String;
 
 export default function Signin(){
 
+    const router = useRouter();
     const[userInfo , setUserInfo] = useState({
                                         userName : '',
                                         userEmail : '',
@@ -65,6 +67,7 @@ const handleSubmit =  async() =>{
         userEmail : '',
         userPassword : ''
     })
+    router.push('/login')
 }
 interface value{
     value : String

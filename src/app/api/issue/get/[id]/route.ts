@@ -6,9 +6,11 @@ import {connect} from '@/dbConfing/dbConfig'
 
 // connect();
 
-export async function GET(request : NextApiRequest){
+export async function GET(request : NextApiRequest,
+    { params }: { params: { id: string } }
+){
     await connect();
-    console.log(request.url)
+    console.log(params.id,"params")
     const url =  await request.url as string;
     const parts = url.split('/');
      const id = parts[parts.length - 1];

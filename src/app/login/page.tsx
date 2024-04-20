@@ -2,6 +2,7 @@
 import React from "react"
 import { useState } from "react"
 import axios from "axios"
+import { useRouter } from 'next/navigation';
 
 interface userFormInfo{
     userEmail : String,
@@ -9,6 +10,7 @@ interface userFormInfo{
 }
 
 export default function Login(){
+    const router = useRouter();
     const[userInfo , setUserInfo] = React.useState({
                                         userEmail : '',
                                         userPassword : ''
@@ -35,8 +37,10 @@ const hadleInput = (e:React.ChangeEvent<HTMLInputElement>) =>{
 }
 
 const handleSubmit = async() =>{
-    const res = await axios.post('/api/users/login' , { email : userInfo.userEmail , password : userInfo.userPassword});
-    console.log(res)
+    const res :any  = await axios.post('/api/users/login' , { email : userInfo.userEmail , password : userInfo.userPassword});
+    console.log(res.data.token)
+    await localStorage.setItem("token" , res.data.token)
+    router.push('/')
     setUserInfo({
         userEmail : '',
         userPassword : ''

@@ -77,9 +77,9 @@ const formattedDate = `${formattedYear}-${formattedMonth}-${formattedDay}`;
             </div>
 
             <div className=" flex gap-5 ml-10 mt-2">
-              { data.status === 'OPEN' && <p className="bg-red-100 p-2 pl-8 pr-8 rounded-lg text-red-600">open</p>}
-              { data.status === 'CLOSED' &&  <p className="bg-green-100 p-2 pl-8 pr-8 rounded-lg text-green-600">closed</p>}
-              { data.status === 'IN_PROGRESS' &&  <p className="bg-violet-100 p-2 pl-8 pr-8 rounded-lg text-violet-600">in-progress</p>}
+              { item.status === 'CLOSED' && <p className="bg-red-100 p-2 pl-8 pr-8 rounded-lg text-red-600">closed</p>}
+              { item.status === 'OPEN' &&  <p className="bg-green-100 p-2 pl-8 pr-8 rounded-lg text-green-600">open</p>}
+              { item.status === 'IN_PROGRESS' &&  <p className="bg-violet-100 p-2 pl-8 pr-8 rounded-lg text-violet-600">in-progress</p>}
               <p className="text-[18px] font-[600] mt-2">{formattedDate}</p>
             </div>
 
